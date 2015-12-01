@@ -191,7 +191,7 @@ MacBook Pro 16GB Memory, Couchbase Server running in Windows 10 using Parallels 
 ##Source code
 The source code can be found on GitHub:
 
-[N1QL Index test code]()
+[N1QL Index test code](https://github.com/martinesmann/cb-n1ql-index-demo)
 
 The implementation tries to compensate for timeouts/errors and retries on operation failsures and timeouts.
 
