@@ -14,13 +14,13 @@ Couchbase uses N1QL in a number of internal tools and applications and last week
 
 In a small application, adding one index to one attribute changed the execution time from +2min. to 2 seconds. No changes were made to the query itself, the only change was the index!
 
-Note: The above query time is not for a single N1QL query but for a sequence of multiple queries in the application on a relatively low-powered VM. 
+>Note: The above query time is not for a single N1QL query but for a sequence of multiple queries in the application on a relatively low-powered VM. 
 
 The expected execution time for a query greatly depends on query complexity and the system, the Couchbase Server and hardware. 
 
 Therefore to to give a more accurate answer a test bench is needed. A well defined set of tests that can be run on different systems to reveal the actual performance metrics for a given setup. In this way a measurement can be given for an actual system and query.
 
-So, instead of just claiming that N1QL is fast, we can could test it on an actual system: your own setup! 
+So, instead of just claiming that N1QL is fast, we can test it on an actual system: your own setup! 
 
 ##Creating a test bench
 First, performance is challenging. It's a challenge to measure, but the real issue is that often we forget WHAT we are testing and therefore also forget when to start the "stopwatch" and when to stop it again.
@@ -67,7 +67,6 @@ The test data criteria can now be boiled down to:
 * The document should have a `type` attribute that can be changed to mimic different documents in the data-set.
 
 With that in mind, let's define the JSON document structure as follows:  
-
 
 ```JSON
 {
@@ -133,7 +132,7 @@ SELECT * FROM system:indexes WHERE name='index_3';
 ```
 
 ###Step 2
-It would probably be possible to continue using the N1QL data manipulation features to create a random data set, but also a bit more involved than creating the documents in from code.
+It would probably be possible to continue using the N1QL data manipulation features to create a random data set, but also a bit more involved than creating the documents in code.
 
 The test bench code will be implemented using .NET and the documents will be generated using the following C# snippet:
 
@@ -230,7 +229,7 @@ After the indexes are created it's time to run the second part of the test and l
 SELECT * FROM `default` WHERE IndexedType='person3' AND Month > 5 AND Day < 20
 ```
 
-Please note this is the exact same query as used in step 3. No changes have been made to the query itself. 
+>Please note: this is the exact same query as used in step 3. No changes have been made to the query itself. 
 
 Typical execution times on my system are between 4ms to 23ms! That's a big difference! But how does data-set size effect this measure? You will have to read on to get that answer.  
 
@@ -261,7 +260,7 @@ MacBook Pro 16GB Memory, Couchbase Server running in Windows 10 using Parallels 
 
 **Observation**, *In terms of execution time there is no big difference from 15K documents to 500K documents when using an index.* 
 
-**Learning**, *using secondary indexes is really important and greatly helps performance!*    
+**Learning**, *using secondary indexes is really important and greatly helps query performance!*    
 
 ##Source code
 The source code can be found on GitHub:
